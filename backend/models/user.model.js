@@ -30,7 +30,7 @@ const userSchema = new mongoose.Schema({
         resumeOriginalName:{type:String},
         company :{type:mongoose.Schema.Types.ObjectId,ref:'Company'},   
         profilePhoto : {type:String,default:""}
-    },
+    },                             
 },{timestamps:true});
 
 export const user = mongoose.model('User',userSchema);

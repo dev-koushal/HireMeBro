@@ -3,7 +3,9 @@ import cookieParser from 'cookie-parser';
 import cors from 'cors';
 import dotenv from 'dotenv';
 import connectDB from './utils/db.js';
-dotenv.config({});
+dotenv.config({
+    path:"./.env"
+});
 const app = express();
 
 app.get('/home',(req,res)=>{
@@ -14,9 +16,9 @@ app.get('/home',(req,res)=>{
 })
 
 // middleware
-app.use(express.json());
+app.use(express.json({limit:"16kb"}));
 
-app.use(express.urlencoded({extended:true}));
+app.use(express.urlencoded({extended:true,limit:"16kb"}));
 
 app.use(cookieParser());
 
@@ -27,9 +29,11 @@ const corsOptions = {
 
 app.use(cors(corsOptions));
 
-
 const PORT = process.env.PORT;
-app.listen(PORT,()=>{
-    connectDB();
-    console.log("Server running at pot: "+ PORT);
-})
+
+await connectDB();
+{
+    app.listen(PORT,()=>{
+        console.log("Server running at port: "+ PORT);
+    })
+}

@@ -32,7 +32,6 @@ app.use(cors(corsOptions));
 
 const PORT = process.env.PORT;
 
-// Api's
 app.use('/api/v1/user',userRoute);
 
 await connectDB();

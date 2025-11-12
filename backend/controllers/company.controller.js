@@ -40,8 +40,8 @@ export const getCompany = async (req,res)=>{
        const companies = await Company.find({userId});
 
        if(!companies){
-        return res.status(400).json({
-            message:"Company not found!",
+        return res.status(404).json({
+            message:"Companies not found!",
             success : false
         })
        }
@@ -55,6 +55,46 @@ export const getCompany = async (req,res)=>{
 export const getCompanyById = async (req,res)=>{
     try {
         const companyId = req.params.id;
+        const company = await Company.findById(companyId);
+         if(!company){
+        return res.status(404).json({
+            message:"Company not found!",
+            success : false
+        })
+       }
+       return res.status(200).json({
+        company,
+        success : true
+       })
+    } catch (error) {
+        console.log(error);
+    }
+}
+
+export const updateCompany = async (req,res)=>{
+    try {
+        const {name,description,website,location} = req.body;
+        const file = req.file;
+        // cloudinary
+
+
+        const updateData = {name,description,website,location};
+
+        const company = await Company.findByIdAndUpdate(req.params.id,updateCompany,{new:true});
+
+        if(!company){
+            res.status(404).json({
+                message:"Company Not found!",
+                success : false
+            });
+        }
+       return  res.status(200).json({
+                message:"Company info Updated!",
+                success : true
+            });
+        
+
+        
     } catch (error) {
         console.log(error);
     }

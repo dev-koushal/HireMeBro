@@ -5,7 +5,7 @@ export const postJob = async (req,res)=>{
         const {title,description,requirments,salary,location,position,jobType,experience,companyId} = req.body;
         const userId = await req.id;
         if(!title ||!description || !requirments ||!salary || !location || !position || !jobType || !experience ||!companyId){
-            return res.status(400).json({
+            return res.status(404).json({
                 message:"Something is missing!",
                 success: false
             })
@@ -36,7 +36,7 @@ export const getJob = async (req,res)=>{
         const jobs = await Job.find(query);
 
         if(!jobs){
-            return res.status(400).json({
+            return res.status(404).json({
                 message:"Job not found",
                 success : false
             })
@@ -55,7 +55,7 @@ export const getJobById = async (req,res) =>{
         const jobId = req.params.id;
         const job = await Job.findById(jobId);
         if(!job){
-             return res.status(400).json({
+             return res.status(404).json({
                 message:"Job not found",
                 success : false
             })
@@ -75,6 +75,17 @@ export const getAdminJobs = async (req,res)=>{
         const adminId = req.id;
 
         const jobs = await Job.find({created_by:adminId})
+
+        if(!jobs){
+             return res.status(404).json({
+                message:"Job not found",
+                success : false
+            })
+        };
+         return res.status(200).json({
+                jobs,
+                success :true
+            })
     } catch (error) {
         console.log(error);
     }

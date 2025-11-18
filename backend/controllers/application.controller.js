@@ -14,7 +14,7 @@ export const applyJob = async (req,res)=>{
     
         // check if user is already applied to the job
 
-        const existingApplication = await Application.findOne({job:jobId,Applicant:userId});
+        const existingApplication = await Application.findOne({job:jobId,applicant:userId});
 
         if(existingApplication){
             return res.status(400).json({
@@ -89,6 +89,54 @@ export const getApplicants = async (req,res)=>{
             populate:{
                 path:"applicant"
             }
+        });
+        if(!job){
+            return res.status(404).json({
+                message : "No Job found",
+                success : false
+            })
+        };
+
+        return res.status(200).json({
+            job,
+            success:true
+        })
+    } catch (error) {
+        console.log(error);
+    }
+}
+
+
+// I needa add a status of the applicant 
+export const updateStatus = async (req,res)=>{
+    try {
+        const {status} = req.body;
+        const applicantionId =req.params.id;
+        
+        if(!status){
+             return res.status(400).json({
+                message : "status is require",
+                success : false
+            })
+        }
+
+        const application = await Application.findOne({_id:applicantionId})
+
+         if(!application){
+             return res.status(400).json({
+                message : "Application not found",
+                success : false
+            })
+        }
+
+        // updating would be great in the status
+
+        application.status = status.toLowerCase();
+        await application.save();
+
+        return res.status(200).json({
+            message : "status updated",
+            success : true
         })
     } catch (error) {
         console.log(error);

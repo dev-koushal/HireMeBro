@@ -34,6 +34,7 @@ export const registerCompany = async (req,res)=>{
     }
 }
 
+// get the company!!
 export const getCompany = async (req,res)=>{
     try {
        const userId = req.id;  //logged in user id
@@ -55,7 +56,6 @@ export const getCompany = async (req,res)=>{
 }
 
 // get company by id
-
 export const getCompanyById = async (req,res)=>{
     try {
         const companyId = req.params.id;

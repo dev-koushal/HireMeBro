@@ -12,7 +12,7 @@ function Signup() {
       <div className="flex justify-center items-center max-w-7xl mx-auto">
         <form
           action=""
-          className="w-1/2 border border-grey-200 rounded-md p-4 my-10"
+          className="w-full md:w-1/2 border border-grey-200 rounded-md p-4 my-10"
         >
           <h1 className="text-xl font-bold mb-8 ">SignUp</h1>
           <div className="my-2">
@@ -56,11 +56,11 @@ function Signup() {
             </RadioGroup>
 
             <div className="flex items-center gap-2 ml-2">
-                <Label>Profile</Label>
+                <Label >Profile</Label>
                 <Input 
                 accept="image/*"
                 type="file"
-                className="cursor-pointer"
+                className="cursor-pointer w-22"
                 />
             </div>
           </div>

@@ -10,10 +10,10 @@ function Login() {
   return (
     <>
       <Navbar />
-      <div className="flex justify-center items-center max-w-7xl mx-auto">
+      <div className="flex justify-center items-center w-full md:max-w-7xl mx-auto">
         <form
           action=""
-          className="w-1/2 border border-grey-200 rounded-md p-4 my-10"
+          className="w-full md:w-1/2  border border-grey-200 rounded-md p-4 my-10"
         >
           <h1 className="text-xl font-bold mb-8 ">Login</h1>
          

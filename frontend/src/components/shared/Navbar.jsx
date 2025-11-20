@@ -15,12 +15,12 @@ function Navbar() {
     <div className="bg-white">
       <div className="flex justify-between items-center mx-auto max-w-7xl h-16">
         <div>
-          <h1 className="text-2xl font-bold">
-            HireMe<span className="text-[#F83002]"> Bro</span>
+          <h1 className="text-2xl font-bold md:ml-0 ml-4">
+            <Link to="/">HireMe<span className="text-[#F83002]">Bro</span></Link>
           </h1>
         </div>
         <div className="flex item-center gap-12">
-          <ul className="flex font-medium items-center gap-8">
+          <ul className="hidden md:flex font-medium items-center gap-8 ">
             <li>Home</li>
             <li>Jobs</li>
             <li>Browse</li>
@@ -31,7 +31,7 @@ function Navbar() {
 
           {
             !user?(
-              <div className="flex items-center gap-2 ">
+              <div className="flex items-center gap-2 md:mr-0 mr-2 ">
                <Link to="/login"> <Button variant="outline">Login</Button></Link>
                 <Link to="/signup"><Button className="bg-[#6A38C2] hover:bg-[#5916cd]">SignUp</Button></Link>
               </div>

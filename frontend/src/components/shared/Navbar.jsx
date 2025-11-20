@@ -32,7 +32,7 @@ function Navbar() {
             <PopoverTrigger asChild>
               <Avatar className="cursor-pointer">
                 <AvatarImage
-                  src="https://github.com/shadcn.png"
+                  src="https://avatars.githubusercontent.com/u/137811402?v=4"
                   alt="profile"
                 />
                 <AvatarFallback>Pf</AvatarFallback>
@@ -42,10 +42,10 @@ function Navbar() {
               <div className="flex items-center space-y-2 gap-4 ">
                 <Avatar className="cursor-pointer">
                   <AvatarImage
-                    src="https://github.com/shadcn.png"
+                    src="https://avatars.githubusercontent.com/u/137811402?v=4"
                     alt="profile"
                   />
-                  <AvatarFallback>Pf</AvatarFallback>
+                  <AvatarFallback>Pfp</AvatarFallback>
                 </Avatar>
                 <div>
                   <h3 className="font-medium ">Koushal Yadav</h3>

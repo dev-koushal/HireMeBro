@@ -32,8 +32,8 @@ function Navbar() {
           {
             !user?(
               <div className="flex items-center gap-2 ">
-                <Button variant="outline">Login</Button>
-                <Button className="bg-[#6A38C2] hover:bg-[#5916cd]">SignUp</Button>
+               <Link to="/login"> <Button variant="outline">Login</Button></Link>
+                <Link to="/signup"><Button className="bg-[#6A38C2] hover:bg-[#5916cd]">SignUp</Button></Link>
               </div>
             ):(
                <Popover>

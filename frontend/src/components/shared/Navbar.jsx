@@ -13,7 +13,7 @@ function Navbar() {
   const user = false;
   return (
     <div className="bg-white">
-      <div className="flex justify-between items-center m-auto max-w-7xl h-16">
+      <div className="flex justify-between items-center mx-auto max-w-7xl h-16">
         <div>
           <h1 className="text-2xl font-bold">
             HireMe<span className="text-[#F83002]"> Bro</span>
@@ -77,8 +77,6 @@ function Navbar() {
           </Popover>
             )
           }
-
-         
         </div>
       </div>
     </div>

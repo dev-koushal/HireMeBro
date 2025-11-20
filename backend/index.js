@@ -12,12 +12,7 @@ dotenv.config({
 });
 const app = express();
 
-app.get('/home',(req,res)=>{
-    return res.status(200).json({
-        message : "Coming from backend!!",
-        success : true
-    })
-})
+
 
 // middleware
 app.use(express.json({limit:"16kb"}));

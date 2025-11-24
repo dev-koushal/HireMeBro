@@ -4,9 +4,13 @@ import { Label } from "@radix-ui/react-label";
 import { Input } from "../ui/input";
 import { RadioGroup, RadioGroupItem } from "@radix-ui/react-radio-group";
 import { Button } from "../ui/button";
-import { Link } from "react-router";
+import { Link, useNavigate } from "react-router";
+import axios from "axios";
+import { USER_API_END_POINT } from "@/utils/constant";
+import { toast } from "sonner";
 
 function Login() {
+  const navigate = useNavigate();
   const [input,setInput] = useState({
       email:"", password:"", role:""
     })
@@ -18,9 +22,24 @@ function Login() {
     const changeFileHandler = (e)=>{
       setInput({...input,file:e.target.files?.[0]});
     }
-     const submitHandler = async(e)=>{ 
+     const submitHandler = async(e)=>{
       e.preventDefault();
-      console.log(input);
+     try {
+      const res = await axios.post(`${USER_API_END_POINT}/login`,input,{
+        headers :{
+            "Content-Type":"application/json"
+        },
+        withCredentials : true,
+      });
+      if(res.data.success){
+        navigate('/');
+        toast.success(res.data.message);
+      }
+
+     } catch (error) {
+      console.log(error);
+      toast.error(error.res.data.message);
+     }
   }
   return (
     <>

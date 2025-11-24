@@ -37,8 +37,9 @@ function Login() {
       }
 
      } catch (error) {
-      console.log(error);
-      toast.error(error.res.data.message);
+      // console.log(error);
+      toast.error(error.response.data.message);
+      
      }
   }
   return (

@@ -5,15 +5,19 @@ import { Input } from "../ui/input";
 import { RadioGroup, RadioGroupItem } from "@radix-ui/react-radio-group";
 import { Button } from "../ui/button";
 import { Link, useNavigate } from "react-router";
-import { AwardIcon } from "lucide-react";
+import { AwardIcon, Loader2 } from "lucide-react";
 import axios from "axios";
 import { USER_API_END_POINT } from "@/utils/constant";
 import { toast } from "sonner";
+import { useDispatch, useSelector } from "react-redux";
+import { setLoading } from "@/redux/authSlice";
 function Signup() {
   const [input,setInput] = useState({
     fullname:"", email:"", phoneNumber:"", password:"", role:"",file:""
   })
-
+  
+  const dispatch = useDispatch();
+  const  {loading} =useSelector(store => store.auth);
   const navigate = useNavigate();
 
   const changeEventHandler = (e) =>{
@@ -36,6 +40,7 @@ function Signup() {
         formData.append("file",input.file);
       }
      try {
+      dispatch(setLoading(true));
       const res = await axios.post(`${USER_API_END_POINT}/register`,formData,{
         headers :{
             "Content-Type":"multipart/form-data"
@@ -50,6 +55,8 @@ function Signup() {
      } catch (error) {
       // console.log(error);
       toast.error(error.response.data.message);
+     }finally{
+      dispatch(setLoading(false));
      }
   }
   return (
@@ -71,7 +78,7 @@ function Signup() {
           </div>
           <div className="my-2">
             <Label>Phone number</Label>
-            <Input onChange={changeEventHandler} value={input.phoneNumber} name="phoneNumber" type="text" placeholder="78050xxxx" />
+            <Input  onChange={changeEventHandler} value={input.phoneNumber} name="phoneNumber" type="text" placeholder="78050xxxx" />
           </div>
           <div className="my-2">
             <Label>Password</Label>
@@ -89,7 +96,7 @@ function Signup() {
                     onChange ={changeEventHandler}
                     className="cursor-pointer"
                 />
-                <Label htmlFor="r1">Student</Label>
+                <Label>Student</Label>
               </div>
               <div className="flex items-center space-x-2">
                 <Input 
@@ -100,9 +107,9 @@ function Signup() {
                     onChange ={changeEventHandler}
                     className="cursor-pointer"
                 />
-                <Label htmlFor="r2">Recruiter</Label>
+                <Label>Recruiter</Label>
               </div>
-              
+
             </RadioGroup>
 
             <div className="flex items-center gap-2 ml-2">
@@ -115,8 +122,10 @@ function Signup() {
                 />
             </div>
           </div>
+          {
+            loading?<Button className="w-full my-2" ><Loader2 className=" mr-2 w-4 h-4 animate-spin "/>Please wait</Button>:<Button className="w-full my-2">SignUp</Button>
 
-          <Button className="w-full my-2" >Signup</Button>
+          }
           <span className="text-sm cursor-pointer">Already have account? <Link className="text-blue-600" to="/login">Login</Link></span>
         </form>
       </div>

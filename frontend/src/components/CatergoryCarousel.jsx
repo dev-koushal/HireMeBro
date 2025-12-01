@@ -33,8 +33,8 @@ function CatergoryCarousel() {
       >
         <CarouselContent>
           {catergory.map((cat, ind) => (
-            <CarouselItem key={ind} className="basis-1/2 md:basis-1/4">
-              <Button className="bg-red-50 hover:bg-red-100 cursor-pointer rounded-sm text-black font-bold text-md h-44 min-w-44 border border-red-900">{cat}</Button>
+            <CarouselItem key={ind} className="basis-50 md:basis-1/4">
+              <Button className="bg-gray-100 hover:bg-red-100 cursor-pointer -rounded-sm text-black font-bold text-md h-44 min-w-44 border border-red-900">{cat}</Button>
             </CarouselItem>
           ))}
         </CarouselContent>
@@ -42,5 +42,6 @@ function CatergoryCarousel() {
     </div>
   );
 }
+
 
 export default CatergoryCarousel;

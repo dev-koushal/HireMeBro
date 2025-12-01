@@ -21,12 +21,9 @@ function Navbar() {
         </div>
         <div className="flex item-center gap-12">
           <ul className="hidden md:flex font-medium items-center gap-8 ">
-            <li>Home</li>
-            <li>Jobs</li>
-            <li>Browse</li>
-            {/* <li><Link>Home</Link></li>
-          <li><Link>Jobs</Link></li>
-          <li><Link>Browse</Link></li> */}
+            <li><Link to='/'>Home</Link></li>
+          <li><Link to='/jobs'>Jobs</Link></li>
+          <li><Link to='/browse'>Browse</Link></li>
           </ul>
 
           {

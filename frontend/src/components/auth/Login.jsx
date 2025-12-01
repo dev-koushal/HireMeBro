@@ -98,11 +98,10 @@ function Login() {
             </RadioGroup>
           </div>
           {
-            loading?<Button clasName="w-full my-2" ><Loader2 className=" mr-2 w-4 h-4 animate-spin "/>Please wait</Button>:<Button className="w-full my-2">Login</Button>
-
+            loading?<Button className="w-full my-2" ><Loader2 className=" mr-2 h-4 animate-spin "/>Please wait</Button>:<Button className="w-full my-2">Login</Button>
           }
           
-          <span className="text-sm cursor-pointer">Don't have an account? <Link className="text-blue-600" to="/login">Signup</Link></span>
+          <span className="text-sm cursor-pointer ">Don't have an account? <Link className="text-blue-600" to="/login">Signup</Link></span>
         </form>
       </div>
     </>

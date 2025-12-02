@@ -39,7 +39,8 @@ function CatergoryCarousel() {
                 <span className="absolute bottom-1 right-1 w-3 h-3 border-b-2 border-r-2 border-red-900 "></span>
                 <span className="absolute bottom-1 left-1 w-3 h-3 border-b-2 border-l-2 border-red-900 "></span>
                 <span className="absolute top-1 right-1 w-3 h-3 border-t-2 border-r-2 border-red-900 "></span>
-                {cat}</Button>
+                {cat}
+              </Button>
             </CarouselItem>
           ))}
         </CarouselContent>

@@ -19,8 +19,8 @@ function Jobs() {
           {jobsArray.length <= 0 ? (
             <span>Job not Found!!</span>
           ) : (
-            <div className="flex-1 md:h-[88vh] overflow-y-auto pb-5">
-              <div className="grid grid-cols-1 md:grid-cols-4 gap-2 md:gap-4">
+            <div className="flex-1 md:h-[88vh]  pb-5">
+              <div className="grid grid-cols-1 md:grid-cols-3 gap-2 md:gap-4">
                 {jobsArray.map((item, index) => (
                   <div>
                     <Job key={index} />

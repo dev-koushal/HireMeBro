@@ -9,8 +9,9 @@ import { Button } from "../ui/button";
 import { Avatar } from "../ui/avatar";
 import { AvatarFallback, AvatarImage } from "@radix-ui/react-avatar";
 import { LogOut, User2 } from "lucide-react";
+import { useSelector } from "react-redux";
 function Navbar() {
-  const user = false;
+  const {user} = useSelector(store => store.auth);
   return (
     <div className="bg-white">
       <div className="flex justify-between items-center mx-auto max-w-7xl h-16">

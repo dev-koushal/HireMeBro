@@ -20,7 +20,7 @@ function Navbar() {
             <Link to="/">HireMe<span className="text-[#F83002]">Bro</span></Link>
           </h1>
         </div>
-        <div className="flex item-center gap-12">
+        <div className="flex item-center gap-20">
           <ul className="hidden md:flex font-medium items-center gap-8 ">
             <li><Link to='/'>Home</Link></li>
           <li><Link to='/jobs'>Jobs</Link></li>
@@ -64,7 +64,7 @@ function Navbar() {
               <div className="mt-4 flex flex-col text-gray-600">
                 <div className="cursor-pointer flex gap-2 items-center w-fit">
                   <User2/>
-                  <Button variant="link" >View Profile</Button>
+                  <Button variant="link" ><Link to='/profile'>View Profile</Link></Button>
                 </div>
                 <div className="cursor-pointer flex gap-2 items-center w-fit">
                   <LogOut/>

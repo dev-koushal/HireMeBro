@@ -37,6 +37,7 @@ function Login() {
         },
         withCredentials : true,
       });
+      ;
       if(res.data.success){
         dispatch(setUser(res.data.user))
         setTimeout(() => navigate('/'), 50);

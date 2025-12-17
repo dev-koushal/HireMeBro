@@ -1,6 +1,9 @@
 import { User } from "../models/user.model.js";
 import bcrypt from "bcryptjs";
 import jwt from "jsonwebtoken";
+import getDataUri from "../utils/dataUri.js";
+import cloudinary from "../utils/cloudinary.js";
+
 
 
 // Logic to register a user
@@ -116,10 +119,17 @@ export const login = async (req, res) => {
 // Logout Logic
 export const logout = async (req, res) => {
   try {
-    return res.status(200).cookie("token", "", { maxAge: 0 }).json({
-      message: "Logged out successfully",
-      success: true,
-    });
+    return res
+      .status(200)
+      .clearCookie("token", {
+        httpOnly: true,
+        secure: true,
+        sameSite: "none",
+      })
+      .json({
+        message: "Logged out successfully",
+        success: true,
+      });
   } catch (error) {
     console.log(error);
   }
@@ -134,12 +144,14 @@ export const updateProfile = async (req, res) => {
     const { fullname, email, phoneNumber, bio, skills } = req.body;
     
     const file = req.file;
- 
-
     //cloudinary fileee
+    const fileUri = getDataUri(file);
+    const cloudResponse = await cloudinary.uploader.upload(fileUri.content);
+    
+
     let skillsArray;
     if(skills){
-    const skillsArray = skills.split(",");
+     skillsArray = skills.split(",");
     }
     const userId = req.id;  //middleware authentication 
 
@@ -158,6 +170,10 @@ export const updateProfile = async (req, res) => {
     if(bio)user.profile.bio = bio
     if(skills) user.profile.skills = skillsArray
      
+    if(cloudResponse){
+      user.profile.resume = cloudResponse.secure_url //cloudinary urllllll
+      user.profile.resumeOriginalName = file.originalname  //orginal file name
+    }
     await user.save();
 
     user = {

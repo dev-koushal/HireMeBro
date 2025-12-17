@@ -27,7 +27,6 @@ const UpdateProfileDialog = ({ open, setOpen }) => {
     phoneNumber: user?.phoneNumber || "",
     bio: user?.profile?.bio || "",
     skills: user?.profile?.skills?.join(",") || "",
-    file: null,
   });
 
   const changeEventHandler = (e) => {
@@ -72,6 +71,7 @@ const UpdateProfileDialog = ({ open, setOpen }) => {
     } finally {
       setLoading(false);
     }
+    console.log(user);
   };
 
   return (

@@ -7,12 +7,19 @@ import { Contact, Mail, Pen } from "lucide-react";
 import { Badge } from "./ui/badge";
 import AppliedJobTable from "./AppliedJobTable";
 import UpdateProfileDialog from "./UpdateProfileDialog";
+import { useDispatch, useSelector } from "react-redux";
+import store from "@/redux/store";
 
-const Skills = ["Html", "Css", "TailwindCss", "JavaScipt"];
 let isResume = "kh";
 
 function Profile() {
-  const [open,setOpen] = useState(false);
+  const [open, setOpen] = useState(false);
+  const dispatch = useDispatch();
+  const { user } = useSelector((store) => store.auth);
+
+  if (!user) {
+  return <Navigate to="/login" replace />;
+}
   return (
     <div>
       <Navbar />
@@ -26,13 +33,15 @@ function Profile() {
               />
             </Avatar>
             <div>
-              <h1 className="text-md font-bold">Full Name</h1>
-              <p className="text-gray-700">
-                Lorem ipsum dolor sit amet consectetur adipisicing elit
-              </p>
+              <h1 className="text-md font-bold">{user?.fullname}</h1>
+              <p className="text-gray-700">{user.profile.bio}</p>
             </div>
           </div>
-          <Button onClick={()=>setOpen(true)} className="text-right cursor-pointer" variant="outline">
+          <Button
+            onClick={() => setOpen(true)}
+            className="text-right cursor-pointer"
+            variant="outline"
+          >
             <Pen />
           </Button>
         </div>
@@ -40,43 +49,36 @@ function Profile() {
         <div className=" md:mt-6 mt-4 space-y-2">
           <div className="flex gap-3 items-center">
             <Mail />
-            <span>KoushalYadva@gmail.com</span>
+            <span>{user.email}</span>
           </div>
           <div className="flex gap-3 items-center">
             <Contact />
-            <span>78050426162</span>
+            <span>{user.phoneNumber}</span>
           </div>
         </div>
         {/* Resume and badges of skills */}
         <div>
           <h1 className="font-semibold text-md mt-4 mb-2">Skills</h1>
           <div className="flex gap-2 items-center">
-            {Skills.length != 0 ? (
-              Skills?.map((item, index) => (
-                <Badge
-                  variant="destructive"
-                  className="bg-green-700 px-2"
-                  key={index}
-                >
-                  {item}
+            {user?.profile?.skills?.length > 0 ? (
+              user.profile.skills.map((skill, index) => (
+                <Badge key={index} className="bg-green-700 px-2">
+                  {skill}
                 </Badge>
               ))
             ) : (
-              <h1 className="bg-red-300 px-2 rounded-full">No Skills found </h1>
+              <span className="bg-red-300 px-2 rounded-full">
+                No Skills found
+              </span>
             )}
           </div>
         </div>
         {/* Resume */}
         <div>
           <h1 className="font-semibold text-md mt-4 ">Resume</h1>
-          {isResume ? (
-            <a target="blank" href="https://www.google.com">
-              <Badge
-                variant="secondary"
-                className="bg-blue-500 text-white dark:bg-blue-600"
-              >
-                Download
-              </Badge>
+          {user?.profile?.resume ? (
+            <a target="_blank" href={user.profile.resume}>
+              <Badge className=" text-blue-600" variant="outline">{user.profile.resumeOriginalName}</Badge>
             </a>
           ) : (
             <span className="bg-red-300 px-2 rounded-full">
@@ -85,11 +87,11 @@ function Profile() {
           )}
         </div>
       </div>
-        <div className="max-w-4xl mx-auto bg-white rounded-2xl">
-          <h1  className="font-semibold text-lg mt-4 mb-2">Applied Jobs</h1>
-          <AppliedJobTable/>
-        </div>
-          <UpdateProfileDialog open={open} setOpen={setOpen}/>
+      <div className="max-w-4xl mx-auto bg-white rounded-2xl">
+        <h1 className="font-semibold text-lg mt-4 mb-2">Applied Jobs</h1>
+        <AppliedJobTable />
+      </div>
+      <UpdateProfileDialog open={open} setOpen={setOpen} />
     </div>
   );
 }

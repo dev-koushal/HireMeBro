@@ -10,7 +10,7 @@ import UpdateProfileDialog from "./UpdateProfileDialog";
 import { useDispatch, useSelector } from "react-redux";
 import store from "@/redux/store";
 
-let isResume = "kh";
+
 
 function Profile() {
   const [open, setOpen] = useState(false);
@@ -28,7 +28,7 @@ function Profile() {
           <div className="flex gap-2 md:gap-8 items-center ">
             <Avatar className="w-12 h-12 md:h-24 md:w-24">
               <AvatarImage
-                src="https://avatars.githubusercontent.com/u/137811402?v=4"
+                src={user?.profile?.profilePhoto}
                 alt="profile"
               />
             </Avatar>

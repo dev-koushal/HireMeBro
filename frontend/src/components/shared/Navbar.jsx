@@ -14,6 +14,7 @@ import axios from "axios";
 import { toast } from "sonner";
 import { USER_API_END_POINT } from "@/utils/constant";
 import { setUser } from "@/redux/authSlice";
+
 function Navbar() {
   const {user} = useSelector(store => store.auth);
   const dispatch = useDispatch();

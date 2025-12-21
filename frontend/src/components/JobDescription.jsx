@@ -3,9 +3,12 @@ import { Badge } from "./ui/badge";
 import { Button } from "./ui/button";
 import { Avatar, AvatarImage } from "@radix-ui/react-avatar";
 import Navbar from "./shared/Navbar";
+import { useSelector } from "react-redux";
 
 const isApplied = false;
 function JobDescription() {
+const {allJobs} =useSelector(store=>store.job)
+
   return (
     <div className="max-w-7xl mx-auto ">
       <Navbar />

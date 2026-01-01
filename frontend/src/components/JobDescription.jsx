@@ -1,13 +1,37 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { Badge } from "./ui/badge";
 import { Button } from "./ui/button";
 import { Avatar, AvatarImage } from "@radix-ui/react-avatar";
 import Navbar from "./shared/Navbar";
-import { useSelector } from "react-redux";
+import { useParams } from "react-router";
+import axios from "axios";
+import { JOB_API_END_POINT } from "@/utils/constant";
+import { setSingleJob } from "@/redux/jobSlice";
+import { useDispatch, useSelector } from "react-redux";
 
 const isApplied = false;
 function JobDescription() {
-const {allJobs} =useSelector(store=>store.job)
+  
+  const dispatch = useDispatch();
+  const params = useParams();
+  const {singleJob} = useSelector(store=>store.job);
+  const {user} = useSelector(store=>store.auth);
+  const jobId = params.id;
+
+   useEffect(()=>{
+       const fetchSingleJob = async ()=>{
+         try {
+            const res = await axios.get(`${JOB_API_END_POINT}/get/${jobId}`,{withCredentials:true});
+            if(res.data.success){
+              console.log(res.data.job);
+              dispatch(setSingleJob(res.data.job));
+            }       
+        } catch (error) {
+            console.log(error);
+        }
+       }
+       fetchSingleJob();
+    },[jobId,dispatch,user?._id])
 
   return (
     <div className="max-w-7xl mx-auto ">
@@ -22,15 +46,15 @@ const {allJobs} =useSelector(store=>store.job)
               />
             </Avatar>
             <div className="items-center">
-              <h1 className="text-xl font-bold ">Google</h1>
+              <h1 className="text-xl font-bold ">{singleJob?.title}</h1>
               <Badge className={"text-[#F83002] font-bold"} variant="ghost">
-                Positions
+                {singleJob?.position} Positions
               </Badge>
               <Badge className={"text-blue-700 font-bold"} variant="ghost">
-                Remote
+                {singleJob?.jobType} 
               </Badge>
               <Badge className={"text-[#7209b7] font-bold"} variant="ghost">
-                25LPA
+                {singleJob?.salary}LPA
               </Badge>
             </div>
           </div>
@@ -48,25 +72,22 @@ const {allJobs} =useSelector(store=>store.job)
         <div className="my-4 space-y-2">
           <h1 className="text-lg font-semibold my-2 ">Details</h1>
           <div>
-            <h1 className="text-md font-semibold">Description</h1>
-            <p>
-              Lorem ipsum, dolor sit amet consectetur adipisicing elit. Dolores
-              soluta, dolor placeat qui doloribus ipsa aspernatur molestias. Eos
-              ipsam cum at saepe inventore aspernatur blanditiis fugiat ex.
-              Consequatur itaque nobis quo sapiente nulla
+            <h1 className="text-md font-semibold inline-block">Description: </h1>{" "}
+            <p className="inline">
+              {singleJob?.description}
             </p>
           </div>
           <div className="flex gap-2 items-center">
-            <h1 className="text-md font-semibold ">Role:</h1>Frontend
+            <h1 className="text-md font-semibold ">Role:</h1>{singleJob?.title}
           </div>
           <div className="flex gap-2 items-center">
-            <h1 className="text-md font-semibold ">Experience:</h1>12yr
+            <h1 className="text-md font-semibold ">Experience:</h1>{singleJob?.experienceLevel}yr
           </div>
           <div className="flex gap-2 items-center">
-            <h1 className="text-md font-semibold ">Salary:</h1>12Lpa
+            <h1 className="text-md font-semibold ">Salary:</h1>{singleJob?.salary}Lpa
           </div>
           <div className="flex gap-2 items-center">
-            <h1 className="text-md font-semibold ">Total Applicants:</h1>1200
+            <h1 className="text-md font-semibold ">Total Applicants:</h1>4
           </div>
         </div>
         <div className="my-4">
@@ -77,7 +98,11 @@ const {allJobs} =useSelector(store=>store.job)
         </div>
         <div className="my-4">
           <h1 className="text-lg font-semibold  space-y-2 ">Location</h1>
-          <p>Indore</p>
+          <p>{singleJob?.location}</p>
+        </div>
+        <div className="my-4">
+          <h1 className="text-lg font-semibold  space-y-2 ">Posted</h1>
+          <p>{singleJob?.createdAt.split("T")[0]}</p>
         </div>
       </div>
     </div>

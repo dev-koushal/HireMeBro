@@ -4,7 +4,7 @@ import jobSlice from "@/redux/jobSlice";
 const store = configureStore({
     reducer:{
         auth : authSlice,
-        job : jobSlice
+        job : jobSlice,
     }
 });
 export default store;

@@ -9,7 +9,6 @@ import { JOB_API_END_POINT } from "@/utils/constant";
 import { setSingleJob } from "@/redux/jobSlice";
 import { useDispatch, useSelector } from "react-redux";
 
-const isApplied = false;
 function JobDescription() {
   
   const dispatch = useDispatch();
@@ -17,7 +16,8 @@ function JobDescription() {
   const {singleJob} = useSelector(store=>store.job);
   const {user} = useSelector(store=>store.auth);
   const jobId = params.id;
-
+  const isApplied = singleJob?.applications?.some(application=>application.applicant === user?._id) || false;
+  
    useEffect(()=>{
        const fetchSingleJob = async ()=>{
          try {

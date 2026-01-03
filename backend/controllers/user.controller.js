@@ -40,7 +40,6 @@ export const register = async (req, res) => {
         profilePhoto : cloudResponse.secure_url
       }
     });
-
     return res.status(201).json({
       message: "Account created successfully",
       success: true,
@@ -145,7 +144,6 @@ export const logout = async (req, res) => {
 
 
 // Update profile
-
 export const updateProfile = async (req, res) => {
   try {
     const { fullname, email, phoneNumber, bio, skills } = req.body;

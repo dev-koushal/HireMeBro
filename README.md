@@ -33,13 +33,4 @@ HireMeBro is a platform where companies can recruit employees based on their rea
 
 ## Contributing
 
-We welcome contributions! Please open an issue or submit a pull request for any improvements or bug fixes.
-
-## Feedback
-
-**Open for feedback!**  
-Share your thoughts and help us build a better platform.
-
----
-
-*HireMeBro – Bringing authenticity to recruitment.*
+I welcome contributions! Please open an issue or submit a pull request for any improvements or bug fixes.
